@@ -19,7 +19,6 @@ export default function LandingPage({ onGetStarted, onSignIn }) {
         </div>
 
         <h1 className="hero-title">
-          {/* Someone to talk to<br />at <em>3 in the morning</em> */}
           A Calm Companion
         </h1>
 
@@ -74,7 +73,7 @@ export default function LandingPage({ onGetStarted, onSignIn }) {
       </section>
 
       <footer className="footer">
-        <div className="logo">just<span>awake</span></div>
+        <div className="logo">Kind<span>eled</span></div>
         <p className="footer-text">Local AI companion. Private by default.</p>
       </footer>
     </div>

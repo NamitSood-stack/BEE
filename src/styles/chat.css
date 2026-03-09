@@ -144,6 +144,28 @@
   font-size: 0.825rem;
   color: var(--text);
   font-weight: 400;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.signout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.signout-btn:hover {
+  color: var(--text-soft);
+  background: var(--stone);
 }
 
 /* MAIN CHAT */

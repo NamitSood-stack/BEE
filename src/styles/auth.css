@@ -201,6 +201,92 @@
   text-decoration: underline;
 }
 
+/* ── Clerk component overrides ───────────────────────────── */
+.clerk-wrapper {
+  width: 100%;
+}
+
+.clerk-root {
+  width: 100% !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.clerk-card {
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  width: 100% !important;
+}
+
+.clerk-hide {
+  display: none !important;
+}
+
+.clerk-input {
+  width: 100% !important;
+  padding: 11px 16px !important;
+  border: 1px solid var(--stone) !important;
+  border-radius: 10px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.9rem !important;
+  color: var(--text) !important;
+  background: white !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s !important;
+}
+
+.clerk-input:focus {
+  border-color: var(--accent-light) !important;
+  box-shadow: 0 0 0 3px rgba(196, 168, 130, 0.12) !important;
+}
+
+.clerk-label {
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: var(--text-soft) !important;
+  margin-bottom: 7px !important;
+  letter-spacing: 0.02em !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.clerk-submit-btn {
+  width: 100% !important;
+  padding: 13px !important;
+  background: var(--text) !important;
+  color: var(--cream) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  box-shadow: none !important;
+}
+
+.clerk-submit-btn:hover {
+  background: var(--accent) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px var(--shadow) !important;
+}
+
+.clerk-social-btn {
+  border: 1px solid var(--stone) !important;
+  border-radius: 10px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.875rem !important;
+  color: var(--text) !important;
+  background: white !important;
+  transition: all 0.15s !important;
+}
+
+.clerk-social-btn:hover {
+  border-color: var(--muted) !important;
+  background: var(--warm-white) !important;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .auth-left { display: none; }

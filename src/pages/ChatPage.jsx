@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useUser, useClerk } from '@clerk/clerk-react';
 import '../styles/chat.css';
 
 const OLLAMA_URL = 'http://localhost:11434/api/chat';
@@ -86,6 +87,7 @@ function saveHistory(history) {
   localStorage.setItem('ja_history', JSON.stringify(history));
 }
 
+
 const PlusIcon = () => (
   <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
 );
@@ -94,7 +96,11 @@ const SendIcon = () => (
   <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
 );
 
-export default function ChatPage({ user = { name: 'you' } }) {
+
+export default function ChatPage() {
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const displayName = user?.firstName || user?.emailAddresses?.[0]?.emailAddress?.split('@')[0] || 'you';
   const [history, setHistory] = useState(loadHistory); 
   const [activeId, setActiveId] = useState(null);
   const [input, setInput] = useState('');
@@ -108,9 +114,11 @@ export default function ChatPage({ user = { name: 'you' } }) {
   const activeChat = history.find((c) => c.id === activeId) || null;
   const messages = activeChat?.messages || [];
 
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, streamingText]);
+
 
   useEffect(() => {
     saveHistory(history);
@@ -125,6 +133,7 @@ export default function ChatPage({ user = { name: 'you' } }) {
     setStreamingText('');
     setTimeout(() => inputRef.current?.focus(), 50);
   }, []);
+
 
   useEffect(() => {
     if (history.length === 0) {
@@ -195,7 +204,6 @@ export default function ChatPage({ user = { name: 'you' } }) {
             full += token;
             setStreamingText(full);
           } catch {
-            // partial JSON, skip
           }
         }
       }
@@ -234,7 +242,6 @@ export default function ChatPage({ user = { name: 'you' } }) {
 
   return (
     <div className="chat-page">
-      {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-logo">just<span>awake</span></div>
 
@@ -266,8 +273,19 @@ export default function ChatPage({ user = { name: 'you' } }) {
 
         <div className="sidebar-footer">
           <div className="sidebar-user">
-            <div className="user-avatar">{user.name[0]}</div>
-            <span className="user-name">{user.name}</span>
+            <div className="user-avatar">{displayName[0].toUpperCase()}</div>
+            <span className="user-name">{displayName}</span>
+            <button
+              className="signout-btn"
+              onClick={() => signOut()}
+              title="Sign out"
+            >
+              <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+            </button>
           </div>
         </div>
       </aside>
